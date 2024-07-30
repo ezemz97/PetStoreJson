@@ -1,0 +1,346 @@
+{
+	"info": {
+		"_postman_id": "eafb9033-80b9-41b9-bddb-50df4b79191a",
+		"name": "Pets Store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22321773"
+	},
+	"item": [
+		{
+			"name": "Create Pet",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const pets = [\r",
+							"  {\r",
+							"    id: 1,\r",
+							"    category: { id: 1, name: \"Dog\" },\r",
+							"    name: \"Tyson\",\r",
+							"    photoUrls: [\"https://www.nylabone.com/-/media/project/oneweb/nylabone/images/dog101/10-intelligent-dog-breeds/golden-retriever-tongue-out.jpg\"],\r",
+							"    tags: [{ id: 1, name: \"Tyson\" }],\r",
+							"    status: \"available\"\r",
+							"  },\r",
+							"  {\r",
+							"    id: 2,\r",
+							"    category: { id: 2, name: \"Cat\" },\r",
+							"    name: \"Mol\",\r",
+							"    photoUrls: [\"https://www.dailypaws.com/thmb/mYqUKSDMBGAZJtvPwq_FAk1ILVI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/white-turkish-angora-cat-1200195063-2000-b76590b6c0144f829ad9ae893dcef813.jpg\"],\r",
+							"    tags: [{ id: 2, name: \"Mol\" }],\r",
+							"    status: \"available\"\r",
+							"  },\r",
+							"  {\r",
+							"    id: 3,\r",
+							"    category: { id: 1, name: \"Dog\" },\r",
+							"    name: \"Max\",\r",
+							"    photoUrls: [\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYeeWBjAy6JGg8KDdwtYxXTgqxyPps0np-_A&s\"],\r",
+							"    tags: [{ id: 1, name: \"Max\" }],\r",
+							"    status: \"available\"\r",
+							"  },\r",
+							"  {\r",
+							"    id: 4,\r",
+							"    category: { id: 2, name: \"Cat\" },\r",
+							"    name: \"Poppy\",\r",
+							"    photoUrls: [\"https://cdn.britannica.com/36/234736-050-4AC5B6D5/Scottish-fold-cat.jpg\"],\r",
+							"    tags: [{ id: 2, name: \"Poppy\" }],\r",
+							"    status: \"available\"\r",
+							"  },\r",
+							"  {\r",
+							"    id: 5,\r",
+							"    category: { id: 1, name: \"Dog\" },\r",
+							"    name: \"Rex\",\r",
+							"    photoUrls: [\"https://cdn.mos.cms.futurecdn.net/ASHH5bDmsp6wnK6mEfZdcU.jpg\"],\r",
+							"    tags: [{ id: 1, name: \"Rex\" }],\r",
+							"    status: \"available\"\r",
+							"  },\r",
+							"  {\r",
+							"    id: 6,\r",
+							"    category: { id: 3, name: \"Bird\" },\r",
+							"    name: \"Buddy\",\r",
+							"    photoUrls: [\"https://www.nps.gov/articles/images/prothonotary_warbler_npgallery_public_domain_nps_sized.jpg?maxwidth=650&autorotate=false\"],\r",
+							"    tags: [{ id: 3, name: \"Buddy\" }],\r",
+							"    status: \"pending\"\r",
+							"  },\r",
+							"  {\r",
+							"    id: 7,\r",
+							"    category: { id: 3, name: \"Bird\" },\r",
+							"    name: \"Jerry\",\r",
+							"    photoUrls: [\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-a8u6qFdMQEtyw2oJTgE3-M_I_qCmtJqHbA&s\"],\r",
+							"    tags: [{ id: 3, name: \"tag2\" }],\r",
+							"    status: \"pending\"\r",
+							"  },\r",
+							"  {\r",
+							"    id: 8,\r",
+							"    category: { id: 3, name: \"Bird\" },\r",
+							"    name: \"Sky\",\r",
+							"    photoUrls: [\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSms0n4L15gz_6lM3qVnf9QHnCwAGtNDtXOAw&s\"],\r",
+							"    tags: [{ id: 3, name: \"Sky\" }],\r",
+							"    status: \"pending\"\r",
+							"  },\r",
+							"  {\r",
+							"    id: 9,\r",
+							"    category: { id: 3, name: \"Bird\" },\r",
+							"    name: \"Feathers\",\r",
+							"    photoUrls: [\"https://d1jyxxz9imt9yb.cloudfront.net/medialib/4268/image/s768x1300/WC202209_LAST_006_430968_reduced.jpg\"],\r",
+							"    tags: [{ id: 3, name: \"Feathers\" }],\r",
+							"    status: \"pending\"\r",
+							"  },\r",
+							"  {\r",
+							"    id: 10,\r",
+							"    category: { id: 4, name: \"Rabbit\" },\r",
+							"    name: \"Bunny\",\r",
+							"    photoUrls: [\"https://www.humanesociety.org/sites/default/files/2019/03/rabbit-475261_0.jpg\"],\r",
+							"    tags: [{ id: 4, name: \"Bunny\" }],\r",
+							"    status: \"sold\"\r",
+							"  }\r",
+							"];\r",
+							"\r",
+							"let index = pm.variables.get(\"index\");\r",
+							"if (index === undefined) {\r",
+							"    index = 0;\r",
+							"    pm.variables.set(\"index\", index);\r",
+							"}\r",
+							"\r",
+							"let pet = pets[index];\r",
+							"\r",
+							"if (pet) {\r",
+							"    pm.variables.set(\"pet\", JSON.stringify(pet));\r",
+							"} else {\r",
+							"    postman.setNextRequest(null);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let petIndex = pm.variables.get(\"petIndex\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Pet created successfully\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    let pet = JSON.parse(pm.variables.get(\"pet\"));\r",
+							"    \r",
+							"    pm.expect(jsonData.id).to.eql(pet.id);\r",
+							"    pm.expect(jsonData.name).to.eql(pet.name);\r",
+							"    pm.expect(jsonData.status).to.eql(pet.status);\r",
+							"\r",
+							"    // Guarda el ID de la mascota si está en estado \"sold\"\r",
+							"    if (pet.status === \"sold\") {\r",
+							"        pm.environment.set(\"soldPetId\", jsonData.id);\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"petIndex++;\r",
+							"pm.variables.set(\"petIndex\", petIndex);\r",
+							"\r",
+							"// Si hay más mascotas para crear, establece la siguiente solicitud\r",
+							"if (petIndex < 10) {\r",
+							"    postman.setNextRequest(\"Create Pet\");\r",
+							"} else {\r",
+							"    postman.setNextRequest(\"Get Sold Pet Details\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{{pet}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Sold Pets",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/findByStatus?status=sold",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"findByStatus"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "sold"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Created Sold Pet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Pet details are correct\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    let expectedPetId = pm.environment.get(\"soldPetId\");\r",
+							"    \r",
+							"    pm.expect(jsonData.id).to.eql(parseInt(expectedPetId));\r",
+							"    pm.expect(jsonData.status).to.eql(\"sold\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/{{soldPetId}}",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"{{soldPetId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Available Pets",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"// Verifica que hay al menos 5 mascotas disponibles\r",
+							"pm.test(\"At least 5 pets available\", function () {\r",
+							"    pm.expect(jsonData.length).to.be.at.least(5);\r",
+							"});\r",
+							"\r",
+							"console.log(\"Available Pets:\", availablePets);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/findByStatus?status=available",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"findByStatus"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "available"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "petIndex",
+			"value": "0",
+			"type": "string"
+		},
+		{
+			"key": "petsData",
+			"value": ""
+		}
+	]
+}
